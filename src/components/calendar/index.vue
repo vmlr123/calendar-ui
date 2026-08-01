@@ -1,6 +1,6 @@
 <template>
   <div class="flex space-x-5" v-bind="$attrs">
-    <div class="flex flex-col">
+    <div class="flex flex-col grow">
       <Year />
       <Month />
       <Dates />
