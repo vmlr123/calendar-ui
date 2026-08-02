@@ -1,14 +1,16 @@
 <template>
-  <div class="flex space-x-5" v-bind="$attrs">
-    <div class="flex flex-col grow">
+  <div class="flex flex-col space-x-5 justify-center" v-bind="$attrs">
+    <div class="flex flex-col grow justify-center mx-auto max-w-2xl">
       <Year @selected="changeYear" />
       <Month @selected="changeMonth" />
-      <Dates :selectedValues :selectedDate />
+      <Dates :selectedValues :selectedDate @selected="changeDate" />
     </div>
-    <div class="w-1/2">
-      <span v-if="selectedDate">
+    <div class="w-1/4 mt-2 mx-auto justify-center text-center">
+      <span v-if="selectedDate" class="text-center justify-center mx-auto">
         You have selected <br />
-        {{ `${selectedDate} ` }}
+        {{
+          `${selectedValues.month + 1} - ${selectedDate} - ${selectedValues.year}`
+        }}
       </span>
     </div>
   </div>
@@ -22,7 +24,7 @@ const Year = defineAsyncComponent(() => import("./Year.vue"));
 const Month = defineAsyncComponent(() => import("./Month.vue"));
 const Dates = defineAsyncComponent(() => import("./Dates.vue"));
 
-const selectedDate = ref(dayjs().date());
+const selectedDate = ref<number | null>(dayjs().date());
 
 const selectedValues = reactive({
   month: dayjs().month(),
@@ -30,11 +32,17 @@ const selectedValues = reactive({
 });
 
 function changeMonth(v: number) {
+  selectedDate.value = null;
   selectedValues.month = v;
 }
 
 function changeYear(v: number) {
+  selectedDate.value = null;
   selectedValues.year = v;
+}
+
+function changeDate(v: number) {
+  selectedDate.value = v;
 }
 </script>
 

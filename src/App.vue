@@ -7,7 +7,7 @@ const Calendar = defineAsyncComponent(
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto py-16">
+  <div class="max-w-2xl mx-auto mt-1 justify-center">
     <Calendar class="w-full" />
   </div>
 </template>
